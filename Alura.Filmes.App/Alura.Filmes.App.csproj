@@ -130,6 +130,10 @@
     <Compile Include="Migrations\20220314104402_Inicial.designer.cs">
       <DependentUpon>20220314104402_Inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220314145218_addgetdate.cs" />
+    <Compile Include="Migrations\20220314145218_addgetdate.designer.cs">
+      <DependentUpon>20220314145218_addgetdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AluraFilmesContextoModelSnapshot.cs" />
     <Compile Include="Negocio\Ator.cs" />
     <Compile Include="Program.cs" />
