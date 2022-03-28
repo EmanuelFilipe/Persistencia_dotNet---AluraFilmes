@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alura.Filmes.App.Negocio
 {
@@ -23,7 +19,6 @@ namespace Alura.Filmes.App.Negocio
         public override string ToString()
         {
             return $"Ator ({Id}): {PrimeiroNome} {UltimoNome}";
-
         }
     }
 }

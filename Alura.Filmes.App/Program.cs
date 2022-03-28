@@ -11,29 +11,27 @@ namespace Alura.Filmes.App
     {
         static void Main(string[] args)
         {
-            using (var context = new AluraFilmesContexto())
+            using (var contexto = new AluraFilmesContexto())
             {
-                context.LogSQLToConsole();
+                contexto.LogSQLToConsole();
 
-                var filme = context.Filmes
-                    .Include(f => f.Atores)
-                    .ThenInclude(fa => fa.Ator)
-                    .First();
-
-                Console.WriteLine(filme);
-                Console.WriteLine("Elenco: ");
-                foreach (var item in filme.Atores)
+                var filme = new Filme
                 {
-                    Console.WriteLine(item.Ator);
-                    //var entidade = context.Entry(item);
-                    //var filmId = entidade.Property("film_id").CurrentValue;
-                    //var actorId = entidade.Property("actor_id").CurrentValue;
-                    //var lastUpdate = entidade.Property("last_update").CurrentValue;
-                    //Console.WriteLine($"Filme: {filmId}, Ator: {actorId}, LastUpdate: {lastUpdate}");
-                }
-            }
+                    Titulo = "Senhor dos Aneis",
+                    Duracao = 120,
+                    AnoLancamento = "200",
+                    Classificacao = "Anything",
+                    IdiomaFalado = contexto.Idiomas.First()
+                };
 
-            Console.ReadKey();
+                contexto.Entry(filme).Property("last_update").CurrentValue = DateTime.Now;
+
+                contexto.Filmes.Add(filme);
+                contexto.SaveChanges();
+
+                Console.ReadKey();
+
+            }
         }
     }
 }

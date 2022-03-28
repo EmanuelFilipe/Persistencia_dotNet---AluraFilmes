@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alura.Filmes.App.Dados
 {
@@ -32,6 +28,11 @@ namespace Alura.Filmes.App.Dados
                 .HasColumnType("text");
 
             builder
+                .Property(f => f.Classificacao)
+                .HasColumnName("rating")
+                .HasColumnType("varchar(10)");
+
+            builder
                 .Property(f => f.AnoLancamento)
                 .HasColumnName("release_year")
                 .HasColumnType("varchar(4)");
@@ -44,6 +45,19 @@ namespace Alura.Filmes.App.Dados
                 .Property<DateTime>("last_update")
                 .HasColumnType("datetime")
                 .IsRequired();
+
+            builder.Property<byte>("language_id");
+            builder.Property<byte?>("original_language_id");
+
+            builder
+                .HasOne(f => f.IdiomaFalado)
+                .WithMany(i => i.FilmesFalados)
+                .HasForeignKey("language_id");
+
+            builder
+                .HasOne(f => f.IdiomaOriginal)
+                .WithMany(i => i.FilmesOriginais)
+                .HasForeignKey("original_language_id");
         }
     }
 }
