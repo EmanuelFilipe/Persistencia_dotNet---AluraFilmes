@@ -17,10 +17,10 @@ namespace Alura.Filmes.App
 
                 var filme = new Filme
                 {
-                    Titulo = "Senhor dos Aneis",
+                    Titulo = "Matrix",
                     Duracao = 120,
-                    AnoLancamento = "200",
-                    Classificacao = "Anything",
+                    AnoLancamento = "1999",
+                    Classificacao = ClassificacaoIndicativa.MaioresQue14,
                     IdiomaFalado = contexto.Idiomas.First()
                 };
 
@@ -28,6 +28,9 @@ namespace Alura.Filmes.App
 
                 contexto.Filmes.Add(filme);
                 contexto.SaveChanges();
+
+                var filmInserted = contexto.Filmes.First(f => f.Titulo == "Matrix");
+                Console.WriteLine(filmInserted.Classificacao);
 
                 Console.ReadKey();
 
