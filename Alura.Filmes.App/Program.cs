@@ -15,22 +15,35 @@ namespace Alura.Filmes.App
             {
                 contexto.LogSQLToConsole();
 
-                var filme = new Filme
+                foreach (var item in contexto.Clientes)
                 {
-                    Titulo = "Matrix",
-                    Duracao = 120,
-                    AnoLancamento = "1999",
-                    Classificacao = ClassificacaoIndicativa.MaioresQue14,
-                    IdiomaFalado = contexto.Idiomas.First()
-                };
+                    Console.WriteLine(item);
+                }
 
-                contexto.Entry(filme).Property("last_update").CurrentValue = DateTime.Now;
+                Console.WriteLine();
 
-                contexto.Filmes.Add(filme);
-                contexto.SaveChanges();
+                foreach (var item in contexto.Funcionarios)
+                {
+                    Console.WriteLine(item);
+                }
 
-                var filmInserted = contexto.Filmes.First(f => f.Titulo == "Matrix");
-                Console.WriteLine(filmInserted.Classificacao);
+
+                //var filme = new Filme
+                //{
+                //    Titulo = "Matrix",
+                //    Duracao = 120,
+                //    AnoLancamento = "1999",
+                //    Classificacao = ClassificacaoIndicativa.MaioresQue14,
+                //    IdiomaFalado = contexto.Idiomas.First()
+                //};
+
+                //contexto.Entry(filme).Property("last_update").CurrentValue = DateTime.Now;
+
+                //contexto.Filmes.Add(filme);
+                //contexto.SaveChanges();
+
+                //var filmInserted = contexto.Filmes.First(f => f.Titulo == "Matrix");
+                //Console.WriteLine(filmInserted.Classificacao);
 
                 Console.ReadKey();
 
