@@ -13,40 +13,25 @@ namespace Alura.Filmes.App
         {
             using (var contexto = new AluraFilmesContexto())
             {
-                contexto.LogSQLToConsole();
+                //contexto.LogSQLToConsole();
+                //var atoresMaisAtuantes = contexto.Atores
+                //    .Include(a => a.Filmografia)
+                //    .OrderByDescending(a => a.Filmografia.Count)
+                //    .Take(5);
 
-                foreach (var item in contexto.Clientes)
+                var sql = @"select a.* from actor a
+                            inner join top5_most_starred_actors filmes on filmes.actor_id = a.actor_id";
+
+                var atoresMaisAtuantes = contexto.Atores
+                                                 .FromSql(sql)
+                                                 .Include(a => a.Filmografia);
+
+                foreach (var ator in atoresMaisAtuantes)
                 {
-                    Console.WriteLine(item);
+                    System.Console.WriteLine($"O ator {ator.PrimeiroNome} {ator.UltimoNome} atuou em {ator.Filmografia.Count} filmes.");
                 }
-
-                Console.WriteLine();
-
-                foreach (var item in contexto.Funcionarios)
-                {
-                    Console.WriteLine(item);
-                }
-
-
-                //var filme = new Filme
-                //{
-                //    Titulo = "Matrix",
-                //    Duracao = 120,
-                //    AnoLancamento = "1999",
-                //    Classificacao = ClassificacaoIndicativa.MaioresQue14,
-                //    IdiomaFalado = contexto.Idiomas.First()
-                //};
-
-                //contexto.Entry(filme).Property("last_update").CurrentValue = DateTime.Now;
-
-                //contexto.Filmes.Add(filme);
-                //contexto.SaveChanges();
-
-                //var filmInserted = contexto.Filmes.First(f => f.Titulo == "Matrix");
-                //Console.WriteLine(filmInserted.Classificacao);
 
                 Console.ReadKey();
-
             }
         }
     }
